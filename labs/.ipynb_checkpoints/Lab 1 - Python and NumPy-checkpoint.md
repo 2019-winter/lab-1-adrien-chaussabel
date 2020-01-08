@@ -14,7 +14,8 @@ jupyter:
 ---
 
 # Name(s)
-**PUT YOUR FULL NAME(S) HERE**
+**Adrien Chaussabel**
+
 
 
 **Instructions:** This is an individual assignment, but you may discuss your code with your neighbors.
@@ -36,7 +37,12 @@ Please read and reference the following as your progress through this course.
 **In the space provided below, what are three things that still remain unclear or need further explanation?**
 
 
-**YOUR ANSWER HERE**
+
+
+
+1. 
+2.
+3.
 
 
 ## Exercises 1-7
@@ -46,46 +52,76 @@ For the following exercises please read the Python appendix in the Marsland text
 ## Exercise 1
 
 ```python
-# YOUR SOLUTION HERE
-#a=1000
-print('this is my answer',a+1) 
+import numpy as np
+a = np.full((6, 4), 2)
+print(a)
 ```
 
 ## Exercise 2
 
 ```python
-# YOUR SOLUTION HERE
-a=2000
+b = np.full((6, 4), 1)
+np.fill_diagonal(b, 3)
+print(b)
 ```
 
 ## Exercise 3
 
 ```python
-# YOUR SOLUTION HERE
+print(a * b) # works because the dimensions are same
+print()
+print(np.dot(a, b)) # does not work because the number of columns in a does not equal the number of rows in b
 ```
 
 ## Exercise 4
 
 ```python
-# YOUR SOLUTION HERE
+print(np.dot(a.transpose(), b)) # works because now the number of columns of a is 4, and number of rows in b is 4
+print()
+print(np.dot(a, b.transpose())) # does not work because number of columns of a is 6, and number of rows in b is 6
 ```
 
 ## Exercise 5
 
 ```python
-# YOUR SOLUTION HERE
+def print_something():
+    print("something")
+
+print_something()
 ```
 
 ## Exercise 6
 
 ```python
-# YOUR SOLUTION HERE
+def print_stats():
+    row = np.random.randint(1, 10)
+    col = np.random.randint(1, 10)
+    matr = np.random.randint(0, 100, size=(row, col))
+    print(matr)
+    print("Mean =", np.mean(matr))
+    print("Std Dev =", np.std(matr))
+    print("Min =", np.min(matr))
+    print("Max =", np.max(matr))
+    print("Sum =", np.sum(matr))
+
+print_stats()
 ```
 
 ## Exercise 7
 
 ```python
-# YOUR SOLUTION HERE
+def countOnesLoop(matr):
+    cnt = 0
+    for i in matr:
+        if i == 1:
+            cnt += 1
+    return cnt
+
+def countOnesWithWhere(matr):
+    return np.where(matr == 1, 1, 0).sum()
+
+print(countOnesLoop(np.array([1,2,3,4,5,1])))
+print(countOnesWithWhere(np.array([1,2,3,1,4,5,1])))
 ```
 
 ## Excercises 8-???
