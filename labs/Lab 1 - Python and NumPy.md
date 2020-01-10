@@ -54,7 +54,7 @@ For the following exercises please read the Python appendix in the Marsland text
 ```python
 import numpy as np
 a = np.full((6, 4), 2)
-print(a)
+a
 ```
 
 ## Exercise 2
@@ -62,14 +62,13 @@ print(a)
 ```python
 b = np.full((6, 4), 1)
 np.fill_diagonal(b, 3)
-print(b)
+b
 ```
 
 ## Exercise 3
 
 ```python
 print(a * b) # works because the dimensions are same
-print()
 print(np.dot(a, b)) # does not work because the number of columns in a does not equal the number of rows in b
 ```
 
@@ -132,28 +131,56 @@ While the Marsland book avoids using another popular package called Pandas, we w
 Repeat exercise A.1 from Marsland, but create a Pandas DataFrame instead of a NumPy array.
 
 ```python
-# YOUR SOLUTION HERE
+# 2 Methods to convert
+import pandas as pd
+
+df1 = pd.DataFrame(2, index = range(6), columns = range(4))
+print(df1)
+print("\nOr..\n")
+df2 = pd.DataFrame(np.full((6, 4), 2))
+print(df2)
+
 ```
 
 ## Exercise 9
 Repeat exercise A.2 using a DataFrame instead.
 
 ```python
-# YOUR SOLUTION HERE
+b2 = pd.DataFrame(1, index = range(6), columns = range(4))
+
+np.fill_diagonal(b2.values, 3)
+b2
 ```
 
 ## Exercise 10
 Repeat exercise A.3 using DataFrames instead.
 
 ```python
-# YOUR SOLUTION HERE
+# cross
+print(df1.multiply(b))
+# dot
+df1.dot(b) # doesn't work because product shape is mismatched
 ```
 
 ## Exercise 11
 Repeat exercise A.7 using a dataframe.
 
 ```python
-# YOUR SOLUTION HERE
+def countOnesPD(df):
+    cnt = 0
+    for i in range(df.shape[0]):
+        for j in range(df.shape[1]):
+            if df.iloc[i, j] == 1:
+                cnt += 1
+    return cnt
+
+countOnesPD(b2)
+```
+
+```python
+def countByWhere(df):
+    return len(np.where(df==1)[0])
+countByWhere(b2)
 ```
 
 ## Exercises 12-14
@@ -173,7 +200,7 @@ Notice how we have nice headers and mixed datatypes? That is one of the reasons 
 How do you select the ``name`` column without using .iloc?
 
 ```python
-## YOUR SOLUTION HERE
+titanic_df.iloc[:, 2:3]
 ```
 
 ## Exercise 13
@@ -182,6 +209,11 @@ After setting the index to ``sex``, how do you select all passengers that are ``
 ```python
 ## YOUR SOLUTION HERE
 titanic_df.set_index('sex',inplace=True)
+
+```
+
+```python
+titanic_df.loc['female']
 ```
 
 ## Exercise 14
@@ -189,6 +221,7 @@ How do you reset the index?
 
 ```python
 ## YOUR SOLUTION HERE
+titanic_df.reset_index()
 ```
 
 ```python
